@@ -1,0 +1,10 @@
+\babel@toc {russian}{}\relax 
+\contentsline {chapter}{ВВЕДЕНИЕ}{2}{Doc-Start}%
+\contentsline {chapter}{\numberline {1}Основная часть}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Общие теоретические сведения}{3}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Задание №1}{3}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Задание №2}{7}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Задание №3}{8}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Задание №4}{9}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Задание №5}{11}{section.1.6}%
+\contentsline {chapter}{ЗАКЛЮЧЕНИЕ}{15}{figure.caption.10}%

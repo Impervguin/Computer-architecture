@@ -1,0 +1,72 @@
+riscv64-linux-gnu-as --march=rv32i myvar.s -o myvar.o
+riscv64-linux-gnu-ld -b elf32-littleriscv -T link.ld myvar.o -o myvar.elf
+riscv64-linux-gnu-objdump -D -M numeric,no-aliases -t myvar.elf
+
+myvar.elf:     file format elf32-littleriscv
+
+SYMBOL TABLE:
+80000000 l    d  .text	00000000 .text
+8000003c l    d  .data	00000000 .data
+00000000 l    df *ABS*	00000000 myvar.o
+00000009 l       *ABS*	00000000 len
+00000002 l       *ABS*	00000000 enroll
+00000004 l       *ABS*	00000000 elem_sz
+8000003c l       .data	00000000 _x
+80000014 l       .text	00000000 lp
+80000028 l       .text	00000000 lt1
+80000030 l       .text	00000000 lt2
+80000038 l       .text	00000000 lp2
+80000000 g       .text	00000000 _start
+80000060 g       .data	00000000 _end
+
+
+
+Disassembly of section .text:
+
+80000000 <_start>:
+80000000:	00000097          	auipc x1,0x0
+80000004:	03c08093          	addi	x1,x1,60 # 8000003c <_x>
+80000008:	00400a13          	addi	x20,x0,4
+8000000c:	0000af83          	lw	x31,0(x1)
+80000010:	00408093          	addi	x1,x1,4
+
+80000014 <lp>:
+80000014:	0000a103          	lw	x2,0(x1)
+80000018:	0040a183          	lw	x3,4(x1)
+8000001c:	00808093          	addi	x1,x1,8
+80000020:	01f16463          	bltu	x2,x31,80000028 <lt1>
+80000024:	00200fb3          	add	x31,x0,x2
+
+80000028 <lt1>:
+80000028:	01f1e463          	bltu	x3,x31,80000030 <lt2>
+8000002c:	00300fb3          	add	x31,x0,x3
+
+80000030 <lt2>:
+80000030:	fffa0a13          	addi	x20,x20,-1
+80000034:	fe0a10e3          	bne	x20,x0,80000014 <lp>
+
+80000038 <lp2>:
+80000038:	0000006f          	jal	x0,80000038 <lp2>
+
+Disassembly of section .data:
+
+8000003c <_x>:
+8000003c:	0001                	.insn	2, 0x0001
+8000003e:	0000                	.insn	2, 0x
+80000040:	0002                	.insn	2, 0x0002
+80000042:	0000                	.insn	2, 0x
+80000044:	00000003          	lb	x0,0(x0) # 0 <enroll-0x2>
+80000048:	0004                	.insn	2, 0x0004
+8000004a:	0000                	.insn	2, 0x
+8000004c:	0008                	.insn	2, 0x0008
+8000004e:	0000                	.insn	2, 0x
+80000050:	0006                	.insn	2, 0x0006
+80000052:	0000                	.insn	2, 0x
+80000054:	00000007          	.insn	4, 0x0007
+80000058:	0005                	.insn	2, 0x0005
+8000005a:	0000                	.insn	2, 0x
+8000005c:	0004                	.insn	2, 0x0004
+	...
+riscv64-linux-gnu-objcopy -O binary --reverse-bytes=4 myvar.elf myvar.bin 
+xxd -g 4 -c 4 -p myvar.bin myvar.hex
+rm myvar.o myvar.bin myvar.elf

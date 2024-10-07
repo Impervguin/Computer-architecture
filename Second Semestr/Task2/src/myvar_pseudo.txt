@@ -1,0 +1,23 @@
+#define len 9 \\ Размер массива
+#define enroll 2 \\ Количество элементов за итерацию
+#define elem_sz 4 \\ Размер элемента массива
+int _x[len] = {1, 2, 3, 4, 8, 6, 7, 5, 4};
+void _start() {
+    int *x1 = _x;
+    int x20 = x0 + (len-1)/enroll \\ В регистре x0 всегда 0;
+    int x31 = x1[0];
+    x1 += elem_sz;  \\ С учётом сложение адресов как char*
+    do {
+        int x2 = x1[0]
+        int x3 = x1[elem_sz] \\ если учитывать, что адреса складываются как char*
+        x1 += elem_sz * enroll;
+        if !(x2 < x31) {
+            x31 = x2;
+        }
+        if !(x3 < x31) {
+            x31 = x3;
+        }
+        x20--;
+    } while (x20 != 0);
+    while(1) {};
+}
